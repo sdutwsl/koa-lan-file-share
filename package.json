@@ -1,0 +1,33 @@
+{
+  "name": "koa-lan-file-share",
+  "version": "1.0.0",
+  "description": "A lan file server and uploader, for share files between devices.",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdutwsl/koa-lan-file-share.git"
+  },
+  "keywords": [
+    "File",
+    "share",
+    "文件共享",
+    "LAN",
+    "lan",
+    "局域网"
+  ],
+  "author": "sdutwsl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sdutwsl/koa-lan-file-share/issues"
+  },
+  "homepage": "https://github.com/sdutwsl/koa-lan-file-share#readme",
+  "dependencies": {
+    "koa": "^2.13.0",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^9.4.0",
+    "koa-static": "^5.0.0"
+  }
+}
