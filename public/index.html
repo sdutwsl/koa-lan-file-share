@@ -1,0 +1,37 @@
+<html>
+
+<head>
+    <title>目录树</title>
+</head>
+
+<body>
+    <div id="Explorer">
+        <ul>
+            <li v-for="(f,i) in files">
+                <div><a :href="'./'+f.name">{{f.name}}</a> <span style="color:red;">{{f.dir?"dir":"file"}}</span></div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script defer>
+    const Explorer = {
+        data() {
+            return {
+                files:[]
+            }
+        },
+        created() {
+            // `this` points to the vm instance
+            axios.get("http://localhost:3000/listDir?path=").then(res=>{
+                console.log(res.data)
+                this.files=res.data
+            })
+        }
+    }
+
+    Vue.createApp(Explorer).mount('#Explorer')
+</script>
+</html>

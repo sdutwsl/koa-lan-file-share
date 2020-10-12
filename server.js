@@ -6,13 +6,13 @@ const app = new Koa();
 const router = new Router();
 const fs = require('fs');
 
-const root = "./public"
+const root = "./public/"
 
 //route
 router.get('/ListDir', (ctx, next) => {
     // ctx.router available
     let files = []
-    innerFiles = fs.readdirSync(root, { withFileTypes: true })
+    innerFiles = fs.readdirSync(root+ctx.request.query.path, { withFileTypes: true })
     for (let f in innerFiles) {
         console.log(innerFiles[f].name)
         files.push({ name: innerFiles[f].name, dir: innerFiles[f].isDirectory() })
