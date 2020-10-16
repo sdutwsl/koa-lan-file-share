@@ -8,7 +8,11 @@
     <div id="Explorer">
         <ul>
             <li v-for="(f,i) in files">
-                <div><a :href="'./'+f.name">{{f.name}}</a> <span style="color:red;">{{f.dir?"dir":"file"}}</span></div>
+                <div>
+                    <a v-if="f.dir" :href="'#'+currentLocation" @click="handleClick(f)">{{f.name}}</a> 
+                    <a v-if="!f.dir" :href="currentLocation+f.name" download>{{f.name}}</a> 
+                    <span style="color:red;">{{f.dir?"dir":"file"}}</span>
+                </div>
             </li>
         </ul>
     </div>
@@ -20,7 +24,13 @@
     const Explorer = {
         data() {
             return {
-                files:[]
+                files:[],
+                currentLocation:"/",
+            }
+        },
+        methods:{
+            handleClick(f){
+                console.log(f)
             }
         },
         created() {
