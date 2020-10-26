@@ -29,7 +29,6 @@
     "koa-mount": "^4.0.0",
     "koa-router": "^9.4.0",
     "koa-static": "^5.0.0",
-    "nodemon": "^2.0.4",
     "vue": "^2.6.12"
   }
 }
