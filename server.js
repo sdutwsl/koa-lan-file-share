@@ -47,7 +47,7 @@ const walkDir = dir => {
 
 
 //route
-router.get('/ListDir', (ctx) => {
+router.get('/ListFiles', (ctx) => {
     // ctx.router available
     ctx.response.body = walkDir(root)
 });

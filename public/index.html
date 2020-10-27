@@ -5,43 +5,32 @@
 </head>
 
 <body>
-    <div id="Explorer">
-        <ul>
-            <li v-for="(f,i) in files">
+    <div>
+        <ul id="Explorer">
+            <li>
                 <div>
-                    <a v-if="f.dir" :href="'#'+currentLocation" @click="handleClick(f)">{{f.name}}</a> 
-                    <a v-if="!f.dir" :href="currentLocation+f.name" download>{{f.name}}</a> 
-                    <span style="color:red;">{{f.dir?"dir":"file"}}</span>
+                    <a href="#">..</a>
+                    <span style="color:red;">dir</span>
                 </div>
             </li>
         </ul>
     </div>
+    <template id="FileItem">
+        <li>
+            <div>
+                <a href="#"></a>
+                <span style="color:red;"></span>
+            </div>
+        </li>
+    </template>
+    <script>
+        fetch("http://localhost:3000/ListFiles").then(res => {
+            if (res.status == 200) {
+                res.json().then(obj=>{
+                })
+            }
+        })
+    </script>
 </body>
-<script src="https://unpkg.com/vue@next"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-<script defer>
-    const Explorer = {
-        data() {
-            return {
-                files:[],
-                currentLocation:"/",
-            }
-        },
-        methods:{
-            handleClick(f){
-                console.log(f)
-            }
-        },
-        created() {
-            // `this` points to the vm instance
-            axios.get("http://localhost:3000/listDir?path=").then(res=>{
-                console.log(res.data)
-                this.files=res.data
-            })
-        }
-    }
-
-    Vue.createApp(Explorer).mount('#Explorer')
-</script>
 </html>
