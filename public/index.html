@@ -24,9 +24,35 @@
         </li>
     </template>
     <script>
-        fetch("http://localhost:3000/ListFiles").then(res => {
+        const server_url = "http://localhost:3000"
+        let dirs = window.location.hash.substr(1, window.location.hash.length).split("/")
+        if (dirs[0] === "") dirs.splice(0, 1)
+
+        const get_current_dir = (server_dir) => {
+            let not_found = false
+            for (let dir in dirs) {
+                let aim_dir = server_dir.subs.find(d => d.name === dirs[dir])
+                if (aim_dir) {
+                    server_dir = aim_dir
+                    continue
+                } else {
+                    not_found = true
+                    break
+                }
+            }
+            if (!not_found) {
+                return server_dir
+            } else {
+                return undefined
+            }
+
+        }
+
+        fetch(server_url + "/ListFiles").then(res => {
             if (res.status == 200) {
-                res.json().then(obj=>{
+                res.json().then(obj => {
+                    let current_dir=get_current_dir(obj)
+                    console.log(current_dir)
                 })
             }
         })
