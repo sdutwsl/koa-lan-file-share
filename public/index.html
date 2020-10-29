@@ -81,6 +81,17 @@
             let t = document.querySelector("#FileItem")
             let a = t.content.querySelector("#FileName")
             let s = t.content.querySelector("#FileType")
+            //不是根目录添加返回上级
+            if(window.location.hash!==""){
+                a.innerText=".."
+                let hash=window.location.hash
+                //TODO:增加返回
+                hash=hash.substr(0,hash.length-dir.name.length)
+
+                console.log(hash)
+                a.removeAttribute("download")
+                s.innerText = "dir"
+            }
             dir.subs.forEach(element => {
                 a.innerText = element.name
                 if (element.dir) {
@@ -93,7 +104,7 @@
                     href = href.replace(/\/+/g, "/")
                     //去掉f**king http(s)
                     a.setAttribute("href","/"+href.replace(/https?:/,""))
-                    a.download = element.name
+                    a.setAttribute("download",element.name)
                     s.innerText = "file"
                 }
                 let clone = document.importNode(t.content, true)
