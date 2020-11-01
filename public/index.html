@@ -15,6 +15,21 @@
     <template id="FileItem">
         <li>
             <div>
+                <svg id="SvgDir" width="1em" height="1em" t="1604244220931" class="icon" viewBox="0 0 1024 1024"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1314" width="200" height="200">
+                    <path d="M211.37408 477.63456h606.1056v40.96H211.37408z" fill="" p-id="1315"></path>
+                    <path
+                        d="M837.95968 815.65696H190.95552l-0.06144-20.48V242.52416h240.06656l106.8032 62.62784h300.19584v510.50496z m-606.1056-40.96h565.1456V346.112H526.6432L419.84 283.48416h-187.98592v491.2128z"
+                        fill="" p-id="1316"></path>
+                </svg>
+                <svg id="SvgFile" width="1em" height="1em" t="1604244330193" class="icon" viewBox="0 0 1024 1024"
+                    version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2814" width="200" height="200">
+                    <path d="M313.0368 429.40416h399.36v40.96h-399.36zM313.0368 618.86464h399.36v40.96h-399.36z" fill=""
+                        p-id="2815"></path>
+                    <path
+                        d="M816.20992 823.86944H209.26464V200.13056h478.35136l128.57344 134.22592v489.51296z m-565.98528-40.96h525.02528V350.8224l-105.10336-109.73184H250.22464v541.81888z"
+                        fill="" p-id="2816"></path>
+                </svg>
                 <a id="FileName" href="#"></a>
                 <span id="FileType" style="color:red;"></span>
             </div>
@@ -81,13 +96,15 @@
             let t = document.querySelector("#FileItem")
             let a = t.content.querySelector("#FileName")
             let s = t.content.querySelector("#FileType")
+            let svg_dir = t.content.querySelector("#SvgDir")
+            let svg_file = t.content.querySelector("#SvgFile")
+            console.log(svg_file, svg_dir)
             //不是根目录添加返回上级
-            if(window.location.hash!==""){
-                a.innerText=".."
-                let hash=window.location.hash
+            if (window.location.hash !== "") {
+                a.innerText = ".."
+                let hash = window.location.hash
                 //TODO:增加返回
-                hash=hash.substr(0,hash.length-dir.name.length)
-
+                hash = hash.substr(0, hash.length - dir.name.length)
                 console.log(hash)
                 a.removeAttribute("download")
                 s.innerText = "dir"
@@ -98,14 +115,18 @@
                     a.href = window.location + "/" + element.name
                     a.removeAttribute("download")
                     s.innerText = "dir"
+                    svg_dir.setAttribute("style", "display:inline;")
+                    svg_file.setAttribute("style", "display:none;")
                 } else {
                     let href = window.location.toString().replace("#", "/") + "/" + element.name
                     //各种/////换成/
                     href = href.replace(/\/+/g, "/")
                     //去掉f**king http(s)
-                    a.setAttribute("href","/"+href.replace(/https?:/,""))
-                    a.setAttribute("download",element.name)
+                    a.setAttribute("href", "/" + href.replace(/https?:/, ""))
+                    a.setAttribute("download", element.name)
                     s.innerText = "file"
+                    svg_dir.setAttribute("style", "display:none;")
+                    svg_file.setAttribute("style", "display:file;")
                 }
                 let clone = document.importNode(t.content, true)
                 explorer.appendChild(clone)
@@ -120,8 +141,8 @@
                     //触发一次渲染
                     window.onhashchange()
                     //如果没有# 则加上 否则点击链接就会生成错误的地址
-                    if(window.location.href.toString().indexOf("#")===-1)
-                        window.location.href=window.location.href+"#"
+                    if (window.location.href.toString().indexOf("#") === -1)
+                        window.location.href = window.location.href + "#"
                 })
             }
         })
