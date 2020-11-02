@@ -98,16 +98,19 @@
             let s = t.content.querySelector("#FileType")
             let svg_dir = t.content.querySelector("#SvgDir")
             let svg_file = t.content.querySelector("#SvgFile")
-            console.log(svg_file, svg_dir)
             //不是根目录添加返回上级
             if (window.location.hash !== "") {
                 a.innerText = ".."
                 let hash = window.location.hash
-                //TODO:增加返回
-                hash = hash.substr(0, hash.length - dir.name.length)
-                console.log(hash)
+                let macher = new RegExp("/+" + dir.name)
+                hash = hash.replace(macher, '')
                 a.removeAttribute("download")
+                a.setAttribute('href', hash)
                 s.innerText = "dir"
+                svg_dir.setAttribute("style", "display:inline;")
+                svg_file.setAttribute("style", "display:none;")
+                let clone = document.importNode(t.content, true)
+                explorer.appendChild(clone)
             }
             dir.subs.forEach(element => {
                 a.innerText = element.name
