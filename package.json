@@ -4,7 +4,7 @@
   "description": "A lan file server and uploader, for share files between devices.",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
